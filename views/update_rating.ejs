@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<title>bookspace</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<link rel="stylesheet" href="css/common.css">
+<style>
+  .bgimg {
+    background-position: center;
+    background-size: cover;
+    background-image: url("../img/updateimg.jpg");
+    min-height: 65%;
+  }
+  
+@media screen and (min-width: 900px) {
+  .col {
+    width: 15%
+  }
+}
+@media screen and (min-width: 500px) and (max-width:900px){
+  .col {
+    width: 33%
+  }
+}
+</style>
+
+<body>
+  <div class="top">
+    <div class="row padding black">
+      <div class="col ">
+        <a href="/landing" class="button block black">Home</a>
+      </div>
+      <div class="col ">
+        <a href="/logout" class="button block black">Logout</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="bgimg display-container grayscale-min" id="home">
+    
+  </header>
+
+  <div class="sand grayscale large">
+
+    <div class="container" id="menu">
+      <div class="content" style="max-width:700px">
+
+        <h5 class="center padding-48"><span class="tag wide">Update Rating</span></h5>
+
+        <div id="isbn" class="row card padding">
+
+          <form id="update_rating" method="POST">
+            <p>
+              <%book._id%>
+            </p>
+            <p>review id: <input class="input padding-16 border" name="_id" type="text" value=<%=book._id%>></p>
+            <p>ISBN: <input class="input padding-16 border" readonly name="ISBN" type="text" value=<%=book.ISBN %>></p>
+            <p>Book title: <input class="input padding-16 border" name="Book_Title" type="text" readonly
+                value="<%= book['Book_Title'] %>"></p>
+            <p>Book author: <input readonly class="input padding-16 border" name="Book_Author" type="text" readonly
+                value="<%= book['Book_Author'] %>" %>></p>
+            <p>Your userid: <input readonly class="input padding-16 border" type="text" id="userid" name="User_ID"></p>
+            <p><input class="input padding-16 border" type="number" min="0" max="10" placeholder="Enter rating between 1-10" required
+                name="rating"></p>
+            <p><button class="button black" type="submit">Go</button></p>
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <div style="padding-bottom:32px;">
+    </div>
+  </div>
+
+  <script>
+
+    window.onload = function () {
+      document.getElementById('userid').value = sessionStorage.getItem('User_ID');
+    };
+
+
+  </script>
+
+<%-include('include/_footer')%>

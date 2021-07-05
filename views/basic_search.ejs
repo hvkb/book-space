@@ -1,0 +1,92 @@
+<!DOCTYPE html> <!--Page not used-->
+<html>
+<title>bookspace</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<link rel="stylesheet" href="css/common.css">
+<style> 
+.bgimg {
+  background-position: center;
+  background-size: cover;
+  background-image: url("../img/basicsearch.jpg");
+  min-height: 65%;
+}
+</style>
+<body>
+<%-include('include/_nav')%>
+<header class="bgimg display-container grayscale-min" id="home"></header>
+
+<div class="large grayscale">
+<div class="container" id="menu">
+    <div class="content" style="max-width:700px">
+   
+      <h5 class="center padding-48"><span class="tag wide">Welcome to basic search!</span></h5>
+    
+      <div class="row center card padding">
+        <a href="javascript:void(0)" onclick="openMenu(event, 'top-rated');" id="myLink">
+          <div class="col s6 tablink">Top rated books</div>
+        </a>
+        <a href="javascript:void(0)" onclick="openMenu(event, 'most-rated');" id="myLink">
+            <div class="col s6 tablink">Books with most ratings</div>
+          </a>
+         
+        
+      </div>
+  
+      <div id="top-rated" class="container menu padding-48 card">
+        <div class="container" id="where" style="padding-bottom:32px;">
+            <div class="content" style="max-width:700px">
+              <form action="/top-rating-results" method="GET">
+                <p><input class="input padding-16 border" type="number" placeholder="How many entries do you want to fetch?" required name="limit"></p>
+                <p><button class="button black" type="submit">Go</button></p>
+              </form>
+            </div>
+          </div>
+      </div>
+      <div id="most-rated" class="container menu padding-48 card">
+        <div class="container" id="where" style="padding-bottom:32px;">
+            <div class="content" style="max-width:700px">
+        
+              <form action="/most-rated-results" method="GET">
+                <p><input class="input padding-16 border" type="number" placeholder="How many entries do you want to fetch?" required name="limit"></p>
+                <p><button class="button black" type="submit">Go</button></p>
+              </form>
+             
+            </div>
+          </div>
+      </div>
+         
+    </div>
+      
+      
+
+     
+    </div>
+  </div>
+<div class="container" id="where" style="padding-bottom:32px;">
+</div>
+</div>
+
+<script>
+    // Tabbed Menu
+    function openMenu(evt, menuName) {
+      var i, x, tablinks;
+      x = document.getElementsByClassName("menu");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < x.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" dark-grey", "");
+      }
+      document.getElementById(menuName).style.display = "block";
+      evt.currentTarget.firstElementChild.className += " dark-grey";
+    }
+    document.getElementById("myLink").click();
+    </script>
+
+<!--includer footer-->
+<%-include('include/_footer')%>
+<!---/include footer-->

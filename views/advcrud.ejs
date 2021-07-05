@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<title>Advanced Search</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<link rel="stylesheet" href="css/common.css">
+<style>
+  .bgimg {
+  background-position: center;
+  background-size: cover;
+  background-image: url("../img/advcrudcover.jpg");
+  min-height: 65%;
+}
+</style>
+<body>
+<%-include('include/_nav')%>
+<header class="bgimg display-container grayscale-min" id="home">
+</header>
+<div class="large">
+<div class="container">
+    <div class="content" style="max-width:700px">
+      <h3 class="center padding-48"><span class="tag wide">Advanced Search</span></h3>
+      <div class="row center card padding">
+        <form action="/adv-search-results" method="GET">
+          <p><input class="input padding-16 border" type="text" placeholder="Enter title (optional)"  name="title"></p>
+          <p><input class="input padding-16 border" type="text" placeholder="Enter author (optional)"  name="author"></p>
+          <p><input class="input padding-16 border" type="text" placeholder="Enter Year (optional)"  name="year"></p>
+          <p><input class="input padding-16 border" type="number" placeholder="How many entries do you want to fetch? (optional)" name="num"></p>
+          <p><button class="button black" type="submit">Search</button> *enter atleast one field before pressing on search</p>
+        </form>
+      </div> 
+    </div>
+  </div>
+
+<div  style="padding-bottom:32px;">
+</div>
+</div>
+
+
+<%-include('include/_footer')%>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<title>bookspace</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<link rel="stylesheet" href="css/common.css">
+
+<style>
+  .bgimg {
+    background-position: center;
+    background-size: cover;
+    background-image: url("../img/logincover.jpg");
+    min-height: 65%;
+  }
+  @media screen and (min-width: 900px) {
+  .col {
+    width: 15%
+  }
+}
+@media screen and (min-width: 500px) and (max-width:900px){
+  .col {
+    width: 33%
+  }
+}
+
+</style>
+<body>
+  <div class="top">
+    <div class="row padding black">
+      <div class="col">
+        <a  href="/basic-search" class="button block black">Basic Search</a>
+      </div>
+      <div class="col">
+        <a href="/adv-search" class="button block black">Advanced Search</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="bgimg display-container grayscale-min" id="home">
+   
+    
+  </header>
+
+  <div class="grayscale large">
+      
+    <!-- Menu Container -->
+    <div class="container" id="menu">
+      <div class="content" style="max-width:700px">
+
+        <h5 class="center padding-48"><span class="tag wide">Bookspace</span></h5>
+        <h5 class="center"><span class=" wide">Login/Sign up to continue!</span></h5>
+        <div class="row center card padding">
+          <a href="javascript:void(0)" onclick="openMenu(event, 'LogIn');" id="myLink">
+            <div class="col s6 tablink">Log In</div>
+          </a>
+          <a href="javascript:void(0)" onclick="openMenu(event, 'SignUp');">
+            <div class="col s6 tablink">Sign Up</div>
+          </a>
+        </div>
+
+        <div id="LogIn" class="container menu padding-48 card">
+          <div class="container" id="where" style="padding-bottom:32px;">
+            <div class="content" style="max-width:700px">
+              <h5 class="center padding-48"><span class="tag wide">Login</span></h5>
+              <form class="login">
+                <p><input class="input padding-16 border" type="text" placeholder="Enter email" required
+                  name="email" ></p>
+                  <div class="email-error-login"></div>
+
+                  <p><input class="input padding-16 border" type="password" placeholder="Enter password" required
+                    name="password" ></p>
+                    <div class="password-error-login"></div>
+              
+                <p><button class="button black" type="submit">Log In</button></p>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div id="SignUp" class="container menu padding-48 card">
+          <div class="container" id="where" style="padding-bottom:32px;">
+            <div class="content" style="max-width:700px">
+              <h5 class="center padding-48"><span class="tag wide">Sign Up</span></h5>
+              <form name="signup" class="signup" id="signup">
+                <p><input class="input padding-16 border" type="text" placeholder="Enter email" required
+                    name="email" id="email"></p>
+                    <div class="email-error"></div>
+
+                    <p><input class="input padding-16 border" type="password" placeholder="Enter password" required
+                      name="password" id="password"></p>
+                      <div class="password-error"></div>
+                
+                <p><button class="button black" type="submit">Sign Up</button></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact/Area Container -->
+    <div class="container" id="where" style="padding-bottom:32px;">
+    </div>
+    <!-- End page content -->
+  </div>
+
+  <script>
+
+    
+
+
+    // Tabbed Menu
+    function openMenu(evt, menuName) {
+      var i, x, tablinks;
+      x = document.getElementsByClassName("menu");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < x.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" dark-grey", "");
+      }
+      document.getElementById(menuName).style.display = "block";
+      evt.currentTarget.firstElementChild.className += " dark-grey";
+    }
+    document.getElementById("myLink").click();
+
+    const loginform = document.querySelector('.login');
+    const emailErrorLogin = document.querySelector('.email-error-login');
+    const passwordErrorLogin = document.querySelector('.password-error-login');
+    loginform.addEventListener('submit', async (e) => {
+        e.preventDefault();
+       
+        //reset errors
+        emailErrorLogin.textContent = '';
+        passwordErrorLogin.textContent = '';
+
+        //get the values
+        const email = loginform.email.value;
+        const password = loginform.password.value;
+        
+        try {
+            const res = await fetch('/login',{
+                method: 'POST',
+                body: JSON.stringify({email: email, password: password}),
+                headers: {'Content-Type': 'application/json'}
+            });
+            const data = await res.json(); 
+           
+            if(data.errors){
+              emailErrorLogin.textContent = data.errors.email;
+              passwordErrorLogin.textContent = data.errors.password;
+            }
+            if(data.user){
+              //storing email (user_id) to local storage
+              sessionStorage.setItem('User_ID', email);
+               location.assign('/landing'); 
+            }  
+        } catch (err) {
+            console.log(err);
+        }
+      
+        
+    })
+
+
+    const form = document.querySelector('.signup');
+    const emailError = document.querySelector('.email-error');
+    const passwordError = document.querySelector('.password-error');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        //reset errors
+        emailError.textContent = '';
+        passwordError.textContent = '';
+
+        //get the values
+        const email = form.email.value;
+        const password = form.password.value;
+         
+        try {
+            const res = await fetch('/signup',{
+                method: 'POST',
+                body: JSON.stringify({email: email, password: password}),
+                headers: {'Content-Type': 'application/json'}
+            });
+            const data = await res.json(); 
+            if(data.errors){
+                emailError.textContent = data.errors.email;
+                passwordError.textContent = data.errors.password;
+            }
+            else if(data.user){
+              
+              //storing email (user_id) to local storage
+              sessionStorage.setItem('User_ID', email);
+               location.assign('/landing'); 
+            }
+
+            
+        } catch (err) {
+            console.log(err);
+        }
+        
+    })
+
+
+  </script>
+
+<!--includer footer-->
+<%-include('include/_footer')%>
+<!---/include footer-->

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<title>bookspace</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+  crossorigin="anonymous" />
+  
+<style>
+
+  .bgimg {
+    background-position: center;
+    background-size: cover;
+    background-image: url("img/landingimg.jpg");
+    min-height: 75%;
+  }
+
+</style>
+
+<body>
+  
+  <%-include('include/_nav')%>
+  <header class="bgimg display-container grayscale-min" id="home">
+    <div class="display-middle center">
+      <span class="text-white" style="font-size:90px">Welcome!</span>
+    </div>
+  </header>
+
+  <div class="grayscale large">
+
+    <div class="container" id="about">
+      <div class="content" style="max-width:700px">
+        <h5 class="center padding-64"><span class="tag wide">your ratings</span></h5>
+        
+        <table class="table">
+          <tr>
+            <th>ISBN</th>
+            <th>Book Name</th>
+            <th>Rating</th>
+            <th>Modify/Delete</th>
+          </tr>    
+          <tbody>    
+          <% for(var i=0;i<rating.length;i++){%>
+          <tr>
+            <td><%= rating[i].ISBN %></td>
+            <td><%= rating[i].Book_Title%> </td>
+            <td><%= rating[i].Book_Rating %></td>
+            <td>
+              <a href="/update-rating?id=<%= rating[i]._id%>&userid=<%= rating[i].User_ID%>" data-id=<%= rating[i]._id%> class="btn border-shadow update"><!--css?-->
+                <span class="text-gradient"> <i class="fas fa-pencil-alt"></i></span><!--css?-->
+              </a>
+              <a class="btn border-shadow delete" data-id=<%= rating[i]._id%>> 
+                <span class="text-gradient"> <i class="fas fa-times"></i></span>
+            </a>
+            </td>
+          </tr>
+          <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+<!--includer footer-->
+<%-include('include/_footer')%>
+<!---/include footer-->

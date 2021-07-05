@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<title>Search</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<link rel="stylesheet" href="css/common.css">
+<style>
+  table td {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+  }
+</style>
+
+<body>
+ 
+  <%-include('include/_nav2')%>
+  <div class="  large">
+    <div class="container" id="menu">
+
+      <div class="content center" style="">
+        <div class="container" id="where">
+          <div class="content">
+            <br>
+            <h3 class="center padding-48"><span class="tag wide"></span></h3>
+          </div>
+          <br>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div class=" center large margin-adv-search overflow">
+    <h3 class="center padding-48"><span class="tag wide">Search Results</span></h3>
+    <table>
+      <tr>
+        <th style="max-width:10%">ISBN</th>
+        <th>Book Name</th>
+        <th>Author</th>
+        <th>Publisher</th>
+        <th>Average Rating</th>
+      </tr>
+      <% for(var i=0;i<rating.length;i++){%>
+        <tr>
+          <td style="max-width:10%">
+            <%= rating[i]._id.ISBN %>
+          </td>
+          <td>
+            <%= rating[i]._id.Book_Title %>
+          </td>
+          <td>
+            <%= rating[i]._id.Author %>
+          </td>
+          <td>
+            <%= rating[i]._id.Publisher %>
+          </td>
+          <td>
+            <%= rating[i].average %>
+          </td>
+        </tr>
+        <% } %>
+    </table>
+
+
+    <!--includer footer-->
+    <%-include('include/_footer')%>
+    <!---/include footer-->

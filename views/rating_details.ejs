@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<title>bookspace</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<link rel="stylesheet" href="css/common.css">
+
+
+<body>
+    <!-- Add a background color and large text to the whole page -->
+    <div class="sand grayscale large">
+
+        <!-- Menu Container -->
+        <div class="container" id="menu">
+            <div class="content" style="max-width:700px">
+
+
+                <h5 class="center padding-48"><span class="tag wide">Add Rating</span></h5>
+                <form action="/api/addrating" method="POST" name="form" id="rating-details">
+                   
+                    <p>ISBN: <input class="input padding-16 border" name="ISBN" type="text" value=<%=book.ISBN
+                            %>></p>
+                    <p>Book title: <input class="input padding-16 border" name="Book_Title" type="text"
+                            readonly value="<%= book['Book_Title'] %>"></p>
+                    <p>Book author: <input readonly class="input padding-16 border" name="Book_Author"
+                            type="text" readonly value="<%= book['Book_Author'] %>" %>></p>
+                    <p>Year of publication: <input readonly class="input padding-16 border" type="text"
+                            name="Year_of_Publication" readonly value="<%= book['Year_of_Publication'] %>" %>></p>
+                    <p>Publisher: <input readonly class="input padding-16 border" name="Publisher" type="text"
+                            readonly value="<%= book['Publisher'] %>" %> ></p>
+                    <p>Your userid: <input readonly class="input padding-16 border" type="text" id="userid"
+                            name="User_ID"></p>
+                    <p id="output"></p>
+                    <p><input class="input padding-16 border" type="number"  min="0" max="10" placeholder="Enter rating (between 1-10)" required
+                            name="Book_Rating"></p>
+                    <p><button class="button black" type="submit" onclick="">Go</button></p>
+                </form>
+
+                <div id="isbn" class="container menu padding-48 card">
+                    <div class="container" id="where" style="padding-bottom:32px;">
+                        <div class="content" style="max-width:700px">
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact/Area Container -->
+    <div class="container" id="where" style="padding-bottom:32px;">
+    </div>
+    <!-- End page content -->
+    </div>
+    <script>
+        window.onload = function () {
+            document.getElementById('userid').value = sessionStorage.getItem('User_ID');
+        };
+    </script>
+
+<!--includer footer-->
+<%-include('include/_footer')%>
+<!---/include footer-->

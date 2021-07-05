@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html>
+<title>Search</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<link rel="stylesheet" href="css/common.css">
+<style>
+  
+
+  table td {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+  }
+  @media screen and (min-width: 900px) {
+  .col {
+    width: 15%
+  }
+}
+@media screen and (min-width: 500px) and (max-width:900px){
+  .col {
+    width: 33%
+  }
+}
+
+</style>
+
+<body>
+  
+  
+  <%-include('include/_nav2')%>
+ 
+  <div class="  large">
+    <div class="container" id="menu">
+
+      <div class="content center" style="">
+        <div class="container" id="where">
+          <div class="content">
+            <br>
+            <h3 class="center padding-48"><span class="tag wide"></span></h3>
+          </div>
+          <br>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div class=" center large margin-adv-search overflow">
+    <h3 class="center padding-48"><span class="tag wide">Search Results</span></h3>
+    <table>
+                <tr>
+                  <th>ISBN</th>
+                  <th>Book Name</th>
+                  <th>Author</th>
+                  <th>Publisher</th>
+                  <th>No of times rated</th>
+                 
+
+                  </tr>
+                  <% for(var i=0;i<rating.length;i++){%>
+                    <tr>
+                      <td><%= rating[i]._id.ISBN %></td>
+                      <td><%= rating[i]._id.Book_Title %></td>
+                      <td><%= rating[i]._id.Author %></td>
+                      <td><%= rating[i]._id.Publisher %></td>
+                      <td><%= rating[i].count %></td>
+                    </tr>
+                    <% } %>
+                    
+                  </table>
+            </div>
+          </div>
+      </div>
+
+     
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      
+      
+    </div>
+  </div>
+
+<!-- Contact/Area Container -->
+<div class="w3-container" id="where" style="padding-bottom:32px;">
+</div>
+<!-- End page content -->
+</div>
+
+
+<!--includer footer-->
+<%-include('include/_footer')%>
+<!---/include footer-->
+
